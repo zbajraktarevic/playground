@@ -1,0 +1,29 @@
+<h2>Todo list</h2>
+
+<mat-form-field class="example-form-field" (keyup)="onEnter($event)" >
+  <mat-label>Add Task</mat-label>
+  <input matInput type="text" [(ngModel)]="task"  >
+  <button *ngIf="task" matSuffix mat-icon-button aria-label="Clear" (click)="task=''">
+    <mat-icon>close</mat-icon>
+  </button>
+  <button data-test="addButton" *ngIf="task" matSuffix mat-icon-button aria-label="Add" (click)="onAddTodo()">
+    <mat-icon>add</mat-icon>
+  </button>
+</mat-form-field>
+
+<mat-spinner *ngIf="(currentTodoStatus$ | async) == 'loading'"></mat-spinner>
+
+<ng-container  *ngIf="(currentTodoStatus$ | async) == 'success'">
+  <mat-card *ngFor="let todo of allTodos$ | async">
+    <mat-card-content>
+      <mat-grid-list cols="2" rowHeight="20:1">
+        <mat-grid-tile>{{todo.task}}</mat-grid-tile>
+        <mat-grid-tile><button  class="d-flex" (click)="onDeleteTodo(todo)"  matSuffix mat-icon-button aria-label="Add" (click)="onAddTodo()">
+      <mat-icon>remove</mat-icon>
+    </button></mat-grid-tile>
+    </mat-grid-list>
+
+    </mat-card-content>
+  </mat-card>
+</ng-container>
+
