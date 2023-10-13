@@ -13,7 +13,6 @@ export class TestComponent {
     const neki = (a: number, b: number) => { return a * b}
 
     GlobalEventDriverService.getInstance().listen('[TODO] add todo', (actionData:any) => {
-      console.log('Responding in TestComponent:', actionData);
-    });
+      console.log('Responding in TestComponent to ngrx action with data: ', actionData);
   }
 }
