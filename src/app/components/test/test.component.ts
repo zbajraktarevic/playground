@@ -10,9 +10,10 @@ export class TestComponent {
 
 
   constructor() {
-    const neki = (a: number, b: number) => { return a * b}
+    const neki = (a: number, b: number) => { return a * b }
 
-    GlobalEventDriverService.getInstance().listen('[TODO] add todo', (actionData:any) => {
+    GlobalEventDriverService.getInstance().listen('[TODO] add todo', (actionData: any) => {
       console.log('Responding in TestComponent to ngrx action with data: ', actionData);
+    });
   }
 }

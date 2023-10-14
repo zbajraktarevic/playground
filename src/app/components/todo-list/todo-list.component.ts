@@ -18,8 +18,9 @@ import { GlobalEventDriverService } from 'src/app/core/services/global-event-dri
 export class TodoListComponent {
 
   allTodos$ = this.store.select<Todo[]>(selectAllTodos);
+
   currentTodoStatus$ = this.store.select<string>(currentTodoStatus)
-  //allTodos$ = new Observable<Todo[]>();
+
   task: string = '';
 
   enableQuickClear = false;
