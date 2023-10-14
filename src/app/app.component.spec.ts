@@ -1,11 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { TestComponent } from './components/test/test.component';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [RouterTestingModule],
-    declarations: [AppComponent]
+    declarations: [AppComponent, TestComponent]
   }));
 
   it('should create the app', () => {
@@ -16,7 +17,6 @@ describe('AppComponent', () => {
 
   it(`should have as title 'todo-app'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
-    console.log('Fixture', fixture);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('todo-app');
   });
