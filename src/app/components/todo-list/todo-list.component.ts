@@ -23,7 +23,9 @@ export class TodoListComponent {
 
   task: string = '';
 
+  timeToQuicklyDelete = 3000;
   enableQuickClear = false;
+
   constructor(protected store: Store<AppState>) {
     //  this.todoList$ = this.todoService.getTodoList();
     this.store.dispatch(loadTodo());
@@ -31,13 +33,16 @@ export class TodoListComponent {
 
   onAddTodo() {
     if (!this.task) return;
+    console.log('disaptching event onAddtodo', this.task)
     //dispatch add new todo Action
-
     this.store.dispatch(addTodo({ task: this.task }));
 
+    // Clear task and enable quick claer
     this.task = '';
     this.enableQuickClear = true;
-
+    setTimeout(() => {
+      this.enableQuickClear = false
+    }, this.timeToQuicklyDelete)
 
   }
 
@@ -47,8 +52,7 @@ export class TodoListComponent {
     this.store.dispatch(removeTodo({ id: todo.id }));
   }
 
-  onEnter(event: any) {
-    // console.log(event)
+  onEnter(event: { [name: string]: any, code: string }) {
     switch (event.code) {
       case 'Enter':
         this.onAddTodo();
