@@ -16,7 +16,6 @@ export class TodoService {
     return this.httpClient.get<TodoListResponse>(this.apiUrl + '/todos', { responseType: 'json' })
       .pipe(
         map((response: TodoListResponse) => {
-          console.log('Doing mapping', response)
           return response.items;
         })
       )
@@ -28,12 +27,7 @@ export class TodoService {
   }
 
   public addTodo(todo: Todo) {
-    return this.httpClient.post<Todo>(this.apiUrl + '/todos', todo).pipe(
-      map((todo: Todo) => {
-        console.log('Creating todo', todo);
-        return todo;
-      })
-    )
+    return this.httpClient.post<Todo>(this.apiUrl + '/todos', todo);
   }
 }
 

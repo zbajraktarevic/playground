@@ -8,7 +8,6 @@ import { GlobalEventDriverService } from 'src/app/core/services/global-event-dri
 })
 export class TestComponent {
 
-
   constructor() {
     const neki = (a: number, b: number) => { return a * b }
 
