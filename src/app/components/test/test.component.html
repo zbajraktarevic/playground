@@ -1,1 +1,4 @@
 <p class="test-css">test works!</p>
+<p *ngFor="let item of filteredList$ | async">
+  {{item.name}}
+</p>
