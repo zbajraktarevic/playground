@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Observable, max, of } from 'rxjs';
 import { GlobalEventDriverService } from 'src/app/core/services/global-event-driver/global-event-driver.service';
 import { AppAndSpecification, AppSpecification } from 'src/app/core/specification/specification.interface';
+import { FooService } from './lib/foo.service';
 
 @Component({
   selector: 'app-test',
@@ -12,13 +13,14 @@ export class TestComponent {
 
   public filteredList$ = new Observable<Array<Delivery>>();
 
-  constructor() {
+  constructor(fooService: FooService) {
     const neki = (a: number, b: number) => { return a * b }
 
     GlobalEventDriverService.getInstance().listen('[TODO] add todo', (actionData: any) => {
       console.log('Responding in TestComponent to ngrx action with data: ', actionData);
     });
 
+    fooService.say("Hello you brave developer!");
     this.playWithSpecification();
   }
 
