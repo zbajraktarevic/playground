@@ -1,4 +1,17 @@
-<p class="test-css">test works!</p>
-<p *ngFor="let item of filteredList$ | async">
+<div class="test-css">
+
+
+<h4>Original delivery list</h4>
+<pre>
+  {{noneFilteredList|json}}
+</pre>
+<h4>Filter deliver list by specification pattern (isActive and hasMaxPrice 5)</h4>
+
+<ul>
+<li *ngFor="let item of filteredList$ | async">
   {{item.name}}
-</p>
+</li>
+</ul>
+
+<button (click)="onPressButton()">Press me</button>
+</div>

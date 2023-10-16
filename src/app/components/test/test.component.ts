@@ -13,38 +13,43 @@ export class TestComponent {
 
   public filteredList$ = new Observable<Array<Delivery>>();
 
-  constructor(fooService: FooService) {
+  public noneFilteredList: Array<Delivery> = [];
+  constructor(protected fooService: FooService) {
     const neki = (a: number, b: number) => { return a * b }
 
     GlobalEventDriverService.getInstance().listen('[TODO] add todo', (actionData: any) => {
       console.log('Responding in TestComponent to ngrx action with data: ', actionData);
     });
 
-    fooService.say("Hello you brave developer!");
+
     this.playWithSpecification();
   }
 
+  public onPressButton() {
+    this.fooService.say("Hello you brave developer!");
+  }
 
   public playWithSpecification() {
 
 
-    const deliveryList: Array<Delivery> = [];
+    const randPrice = () => Math.floor(Math.random() * 10);
 
-    deliveryList.push(new Delivery('Postal', this.getRandomBool(), Math.random() * 10))
-    deliveryList.push(new Delivery('By Email', this.getRandomBool(), Math.random() * 10))
-    deliveryList.push(new Delivery('By Airplaine', this.getRandomBool(), Math.random() * 10))
+    this.noneFilteredList.push(new Delivery('Delivery with horse', this.getRandomBool(), randPrice()))
+    this.noneFilteredList.push(new Delivery('Delivery with Print home', this.getRandomBool(), randPrice()))
+    this.noneFilteredList.push(new Delivery('Postal', this.getRandomBool(), randPrice()))
+    this.noneFilteredList.push(new Delivery('By Email', this.getRandomBool(), randPrice()))
+    this.noneFilteredList.push(new Delivery('By Airplaine', this.getRandomBool(), randPrice()))
 
     let isActiveAndAvailable =  new AppAndSpecification(new AppIsActiveProduct(), new AppIsMaxPrice(5))
 
     // could use with combination of multiple
     // let multiAvailable = new AppAndSpecification(isActiveAndAvailable, new AppIsNamedAs('Postal'))
 
-    let listFiltered = deliveryList.filter((delivery: Delivery) => {
+    let listFiltered = this.noneFilteredList.filter((delivery: Delivery) => {
       return isActiveAndAvailable.isSatisfiedBy(delivery);
     });
 
 
-    console.log(deliveryList);
     this.filteredList$ = of(listFiltered);
   }
 
