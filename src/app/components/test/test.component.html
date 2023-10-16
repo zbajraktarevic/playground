@@ -1,17 +1,21 @@
 <div class="test-css">
 
 
-<h4>Original delivery list</h4>
-<pre>
-  {{noneFilteredList|json}}
-</pre>
-<h4>Filter deliver list by specification pattern (isActive and hasMaxPrice 5)</h4>
+<h2>Original delivery list</h2>
 
-<ul>
-<li *ngFor="let item of filteredList$ | async">
-  {{item.name}}
-</li>
-</ul>
+<select name="original" multiple>
+  <option
+    [value]="d.name"
+  *ngFor="let d of noneFilteredList" >{{isActive(d.active)}} {{d.name}} {{d.price}} Eur</option>
+</select>
 
-<button (click)="onPressButton()">Press me</button>
+<h2>Filter deliver list by specification pattern (isActive and MaxPrice is lower than 5 EUR)</h2>
+<select name="original" multiple *ngIf="(filteredList$|async) " >
+  <option
+    [value]="d.name"
+  *ngFor="let d of filteredList$ | async" >{{isActive(d.active)}} {{d.name}} {{d.price}} Eur</option>
+</select>
+
+
+<button (click)="onPressButton()">Test FooService resposne</button>
 </div>

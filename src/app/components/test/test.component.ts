@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable, max, of } from 'rxjs';
+import { Observable, max, of, BehaviorSubject } from 'rxjs';
 import { GlobalEventDriverService } from 'src/app/core/services/global-event-driver/global-event-driver.service';
 import { AppAndSpecification, AppSpecification } from 'src/app/core/specification/specification.interface';
 import { FooService } from './lib/foo.service';
@@ -50,12 +50,19 @@ export class TestComponent {
     });
 
 
-    this.filteredList$ = of(listFiltered);
+    if (listFiltered) {
+      this.filteredList$ = of(listFiltered);
+    }
+
   }
 
   private getRandomBool():boolean {
     let val = Math.random() * 1000;
     return (val > 500);
+  }
+
+  public isActive(bol: boolean):string {
+   return bol ? 'Yes' : 'No';
   }
 }
 
